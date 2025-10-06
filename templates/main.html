@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Agha Naveed">
+  <meta name="description" content="Apricot Disease Detection by Green Revolution Pakistan">
+  <title>Green Revolution PK | Apricot Disease Detector</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      background: linear-gradient(135deg, #fffdfa, #ffd3c694);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      color: #4e342e;
+    }
+    .root {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        justify-content: center;
+        align-items: center;
+        min-height: calc(100vh - 88.66px);
+        overflow: hidden;
+        background-position: center;
+        background-size: cover;
+        position: relative;
+    }
+    .root .bg-video {
+      display: block;
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+    header {
+        background-color: #060D1D;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.205);
+        display: flex;
+        align-items: center;
+        padding: 10px 20px;
+    }
+    header img {
+      width: 40px;
+      margin-right: 15px;
+      margin-bottom: 10px;
+    }
+    header h2 {
+        margin: 0;
+        color: #BF360C;
+    }
+    header span {
+        color: rgb(255, 235, 235);
+    }
+    .overlay {
+        width: 100%;
+        height: 100%;
+        background-color: #060d1db0;
+        position: absolute;
+        backdrop-filter: blur(10px);
+    }
+    .card {
+      margin-top: 40px;
+      background: #fff8f0;
+      z-index: 100;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      text-align: center;
+      width: 400px;
+    }
+    .card2 {
+        margin-bottom: 40px;
+        background: #fff8f0;
+        z-index: 100;
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        width: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .btn {
+      background: #0a1633;      
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      margin: 10px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+    .btn2 {
+        background: transparent;
+        outline: 1px solid #0a1633;      
+        color: #0a1633;
+        border: none;
+        padding: 12px 20px;
+        margin: 10px;
+        border-radius: 7px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: 0.3s;
+    }
+    .btn:hover {
+      background: #233e80;
+    }
+    .btn2:hover {
+        background-color: #0a1633;
+        color: white;
+    }
+    #preview, #camera {
+      margin-top: 20px;
+      max-width: 300px;
+      border-radius: 12px;
+      display: none;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #2e7d32;
+    }
+  </style>
+</head>
+<body>
+  <header class="gradient">
+    <img src="/static/logo.png" alt="Apricot Logo">
+    <div style="display: flex; flex-direction: column;">
+        <h2>Apricot Disease Detection</h2>
+        <span>Early-stage detection - fast & local</span>
+    </div>
+  </header>
+    <div class="root">
+      <video src="../static/video.webm" class="bg-video" muted autoplay loop></video>
+
+        <div class="overlay"></div>
+        <div class="card">
+            <h3 style="color: black; font-size: 28px;">Upload Image</h3>
+            <div style="display: flex;">
+                <button class="btn" onclick="openCamera()">Use Camera</button>
+                <input type="file" id="galleryInput" accept="image/*" style="display:none" onchange="previewAndUpload(event)">
+                <button class="btn2" onclick="document.getElementById('galleryInput').click()">Upload from Gallery</button>
+            </div>
+        </div>
+        <div class="card2">
+            <h3 style="color: black; font-size: 28px; margin: 0;">Gallery</h3>
+            <span id="pic-toggle">No images yet. Upload one to see results.</span>
+
+            <video id="camera" autoplay playsinline></video>
+            <canvas id="canvas" style="display:none;"></canvas>
+            <img id="preview" />
+            
+            <div id="result"></div>
+        </div>
+    </div>
+
+  <script>
+    const video = document.getElementById('camera');
+    const canvas = document.getElementById('canvas');
+    const preview = document.getElementById('preview');
+    const resultDiv = document.getElementById('result');
+    const picToggle = document.getElementById('pic-toggle');
+
+    async function openCamera() {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      video.style.display = "block";
+      video.srcObject = stream;
+
+      // On click → capture
+      video.addEventListener("click", () => {
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        canvas.getContext('2d').drawImage(video, 0, 0);
+        canvas.toBlob(sendImage, "image/jpeg");
+        preview.src = canvas.toDataURL("image/jpeg");
+        preview.style.display = "block";
+      });
+    }
+
+    function previewAndUpload(event) {
+      const file = event.target.files[0];
+      if (file) {
+        preview.src = URL.createObjectURL(file);
+        preview.style.display = "block";
+        sendImage(file);
+      }
+    }
+
+    function sendImage(file) {
+      let formData = new FormData();
+      formData.append("image", file);
+        if(file)
+            picToggle.style.display = "none";
+    
+        else
+            picToggle.style.display = "block";
+
+
+      fetch("/detect", {
+        method: "POST",
+        body: formData
+      })
+      .then(res => res.json())
+      .then(data => {
+        if((data.confidence == 0)) {
+            resultDiv.innerText = "Result: Healthy";
+        }
+        else {
+            resultDiv.innerText = "Result: " + data.disease + "\nConfidence: " + data.confidence;
+        }
+
+      })
+      .catch(err => {
+        resultDiv.innerText = "Error: " + err;
+      });
+    }
+  </script>
+</body>
+</html>

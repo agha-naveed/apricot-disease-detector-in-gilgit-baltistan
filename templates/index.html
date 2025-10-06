@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Agha Naveed">
+  <meta name="description" content="Apricot Disease Detection by Green Revolution Pakistan">
+  <title>Green Revolution PK | Apricot Disease Detector</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #060D1D;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+    .logos {
+      height: 100px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 20px;
+    }
+    .logos h4 {
+      color: white;
+      font-size: 30px;
+      text-align: center;
+    }
+    .texts h3 span {
+      font-size: 26px;
+      font-weight: 100;
+    }
+    .logos img {
+      width: 50px;
+    }
+
+    .main {
+      display: flex;
+      overflow: hidden;
+      justify-content: space-between;
+      background-position: center;
+      background-size: cover;
+      height: 700px;
+      background-attachment: fixed;
+      align-items: center;
+      position: relative;
+      gap: 100px;
+    }
+    .main img {
+      width: 500px;
+      border-radius: 20px;
+    }
+    .bg-video {
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+    .texts {
+      color: white;
+      background-color: #060d1d86;
+      display: flex;
+      flex-direction: column;
+      padding: 50px;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(6px);
+      width: 100%;
+      height: 100%;
+    }
+    .texts p {
+      font-size: 26px;
+      font-weight: 300;
+      text-align: center;
+    }
+    .texts h3 {
+      margin: 0;
+      display: grid;
+      text-align: center;
+      font-size: 50px;
+    }
+    .nav_btn {
+      background-color: white;
+      color: #060D1D;
+      padding: 12px 27px 13px 27px;
+      font-size: 28px;
+      text-decoration: none;
+      border-radius: 10px;
+      margin-top: 10px;
+      transition: 0.3s;
+    }
+    .nav_btn:hover {
+      border-radius: 30px;
+      color: white;
+      background-color: #060D1D;
+      outline: 1px solid white;
+    }
+    .team_memb {
+      color: white;
+      display: flex;
+      gap: 150px;
+      margin-top: 80px;
+      margin-bottom: 100px;
+      padding: 50px;
+      justify-content: center;
+    }
+    .team_memb p {
+      font-size: 25px;
+      text-align: justify;
+      margin: 10px 0;
+      width: 670px;
+    }
+    .team_memb h3 {
+      font-size: 30px;
+      margin: 0;
+    }
+    .team_memb img {
+      width: 600px;
+    }
+    .team_memb h4 {
+      font-size: 30px;
+      margin: 0;
+      margin-top: 60px;
+    }
+    .team_memb ul {
+      margin: 8px;
+      font-size: 28px;
+      padding: 0;
+      list-style-type: square;
+      list-style-position: inside;
+    }
+  </style>
+</head>
+<body>
+  <div class="logos">
+    <img src="../static/logo.png" alt="">
+    <h4>Green Revolution Pakistan</h4>
+    <img src="../static/pclogo.png" alt="">
+  </div>
+
+  <div class="main">
+    <video src="../static/bg.mp4" muted autoplay loop class="bg-video"></video>
+    <div class="texts">
+      <h3>Apricot Disease Detection
+        <span>(Using Deep Learning)</span>
+      </h3>
+      <p>We are a dedicated team working to develop an Apricot Disease Detector using deep learning technology in Gilgit-Baltistan. Our goal is to support local farmers by providing an easy and accurate way to identify diseases in apricot crops early, helping improve yield quality, reduce losses, and promote sustainable farming in the region.</p>
+      <a href="/detect" class="nav_btn">Predict Disease</a>
+    </div>
+  </div>
+
+  <div class="team_memb">
+    <div>
+      <h3>Intro:</h3>
+      <p>This project focuses on detecting diseases in apricot crops using advanced machine learning techniques. The model is based on YOLOv8, a state-of-the-art object detection algorithm, which has been trained to identify and classify various apricot diseases from images. The system is integrated with a Flask-based web interface, allowing users to upload images and receive instant disease predictions. This project aims to assist farmers in early disease detection, leading to more effective crop management and improved yields.</p>
+      <h4>Team Members</h4>
+      <ul>
+        <li>Mr. S.Naveed Abbas</li>
+        <li>Ms. Saira Batool</li>
+        <li>Mr. Sajid Ali</li>
+        <li>Mr. Danish Ali</li>
+      </ul>
+    </div>
+    <img src="../static/pic.png" alt="">
+  </div>
+</body>
+</html>
