@@ -36,7 +36,7 @@ This project is focused on detecting apricot diseases using state-of-the-art dee
 ```bash
 # Clone the repository
 git clone https://github.com/agha-naveed/apricot-disease-detector-in-gilgit-baltistan
-cd apricot-disease-detection
+cd apricot-disease-detector-in-gilgit-baltistan
 
 # (Optional) Create a virtual environment
 python -m venv venv
